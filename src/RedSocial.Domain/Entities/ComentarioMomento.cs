@@ -1,6 +1,8 @@
+using RedSocial.Domain.Common;
+
 namespace RedSocial.Domain.Entities;
 
-public class ComentarioMomento
+public class ComentarioMomento : IAuditableEntity
 {
     public int IdComentario { get; set; }
     public int IdMomento { get; set; }
@@ -11,6 +13,7 @@ public class ComentarioMomento
     public int TotalRespuestas { get; set; }
     public bool Activo { get; set; } = true;
     public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;
+    public DateTime? FechaActualizacion { get; set; }
     public DateTime? FechaEliminacion { get; set; }
 
     public Momento? Momento { get; set; }

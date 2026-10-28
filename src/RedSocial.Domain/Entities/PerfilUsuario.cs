@@ -1,6 +1,8 @@
+using RedSocial.Domain.Common;
+
 namespace RedSocial.Domain.Entities;
 
-public class PerfilUsuario
+public class PerfilUsuario : IAuditableEntity
 {
     public int IdPerfil { get; set; }
     public int IdUsuario { get; set; }

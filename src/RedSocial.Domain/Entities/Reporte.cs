@@ -1,6 +1,8 @@
+using RedSocial.Domain.Common;
+
 namespace RedSocial.Domain.Entities;
 
-public class Reporte
+public class Reporte : IAuditableEntity
 {
     public int IdReporte { get; set; }
     public int IdReportante { get; set; }
@@ -11,4 +13,5 @@ public class Reporte
     public string? Detalle { get; set; }
     public string Estado { get; set; } = "abierto";
     public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;
+    public DateTime? FechaActualizacion { get; set; }
 }

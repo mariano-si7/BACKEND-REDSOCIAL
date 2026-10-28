@@ -1,8 +1,10 @@
+using RedSocial.Domain.Common;
+
 namespace RedSocial.Domain.Entities;
 
 // Entidad pura: no conoce EF, BCrypt ni nada externo.
 // Nunca guarda la contraseña en texto plano, solo su hash.
-public class Usuario
+public class Usuario : IAuditableEntity
 {
     public int IdUsuario { get; set; }
     public string NombreUsuario { get; set; } = string.Empty;
@@ -18,6 +20,7 @@ public class Usuario
     public DateTime? FechaEliminacion { get; set; }
     public string? MotivoEstadoCuenta { get; set; }
     public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
+    public DateTime? FechaActualizacion { get; set; }
     public DateTime? UltimoLogin { get; set; }
     public PerfilUsuario? Perfil { get; set; }
     public ICollection<UsuarioRol> Roles { get; set; } = [];

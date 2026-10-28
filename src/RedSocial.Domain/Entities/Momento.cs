@@ -1,6 +1,8 @@
+using RedSocial.Domain.Common;
+
 namespace RedSocial.Domain.Entities;
 
-public class Momento
+public class Momento : IAuditableEntity
 {
     public int IdMomento { get; set; }
     public int IdUsuario { get; set; }

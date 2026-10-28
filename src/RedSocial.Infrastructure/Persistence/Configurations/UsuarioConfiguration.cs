@@ -22,6 +22,7 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         builder.Property(u => u.MotivoEstadoCuenta).HasMaxLength(300);
         builder.Property(u => u.EmailVerificado).HasDefaultValue(false);
         builder.Property(u => u.FechaRegistro).HasDefaultValueSql("SYSUTCDATETIME()");
+        builder.Property(u => u.FechaActualizacion).IsRequired(false);
 
         builder.HasIndex(u => u.NombreUsuario).IsUnique();
         builder.HasIndex(u => u.Email).IsUnique();

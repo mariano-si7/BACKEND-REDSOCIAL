@@ -15,6 +15,7 @@ public class ReporteConfiguration : IEntityTypeConfiguration<Reporte>
         builder.Property(r => r.Detalle).HasMaxLength(500);
         builder.Property(r => r.Estado).HasMaxLength(20).HasDefaultValue("abierto").IsRequired();
         builder.Property(r => r.FechaCreacion).HasDefaultValueSql("SYSUTCDATETIME()");
+        builder.Property(r => r.FechaActualizacion).IsRequired(false);
         builder.HasIndex(r => new { r.Estado, r.FechaCreacion });
         builder.HasIndex(r => r.IdUsuarioReportado);
         builder.HasIndex(r => r.IdMomentoReportado);
