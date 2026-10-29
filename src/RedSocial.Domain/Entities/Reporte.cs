@@ -14,4 +14,6 @@ public class Reporte : IAuditableEntity
     public string Estado { get; set; } = "abierto";
     public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;
     public DateTime? FechaActualizacion { get; set; }
+    public int? ModificadoPorUsuarioId { get; set; }
+    public Guid? ModificadoPorTokenId { get; set; }
 }

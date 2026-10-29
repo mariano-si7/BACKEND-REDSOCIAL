@@ -14,6 +14,8 @@ public class PerfilUsuario : IAuditableEntity
     public int TotalMeEncanta { get; set; }
     public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;
     public DateTime? FechaActualizacion { get; set; }
+    public int? ModificadoPorUsuarioId { get; set; }
+    public Guid? ModificadoPorTokenId { get; set; }
 
     public Usuario? Usuario { get; set; }
 }

@@ -1,11 +1,20 @@
 using Microsoft.EntityFrameworkCore;
+using RedSocial.Application.Interfaces.Services;
+using RedSocial.Domain.Common;
 using RedSocial.Domain.Entities;
 
 namespace RedSocial.Infrastructure.Persistence;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    private readonly ICurrentUserContext? _currentUserContext;
+
+    public AppDbContext(
+        DbContextOptions<AppDbContext> options,
+        ICurrentUserContext? currentUserContext = null) : base(options)
+    {
+        _currentUserContext = currentUserContext;
+    }
 
     public DbSet<LogAcceso> LogsAcceso => Set<LogAcceso>();
     public DbSet<Usuario> Usuarios => Set<Usuario>();
@@ -41,6 +50,8 @@ public class AppDbContext : DbContext
     private void AplicarTimestamps()
     {
         var ahora = DateTime.UtcNow;
+        var usuarioId = _currentUserContext?.UsuarioId;
+        var tokenId = _currentUserContext?.TokenId;
 
         foreach (var entry in ChangeTracker.Entries())
         {
@@ -56,12 +67,21 @@ public class AppDbContext : DbContext
             }
             else if (entry.State == EntityState.Modified)
             {
-                var propActualizacion = entry.Properties.FirstOrDefault(p =>
-                    p.Metadata.Name == "FechaActualizacion");
-
-                if (propActualizacion != null)
+                if (entry.Entity is IAuditableEntity auditable)
                 {
-                    propActualizacion.CurrentValue = ahora;
+                    auditable.FechaActualizacion = ahora;
+                    if (usuarioId.HasValue) auditable.ModificadoPorUsuarioId = usuarioId.Value;
+                    if (tokenId.HasValue) auditable.ModificadoPorTokenId = tokenId.Value;
+                }
+                else
+                {
+                    var propActualizacion = entry.Properties.FirstOrDefault(p =>
+                        p.Metadata.Name == "FechaActualizacion");
+
+                    if (propActualizacion != null)
+                    {
+                        propActualizacion.CurrentValue = ahora;
+                    }
                 }
             }
         }

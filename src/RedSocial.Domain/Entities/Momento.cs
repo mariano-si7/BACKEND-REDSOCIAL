@@ -15,6 +15,8 @@ public class Momento : IAuditableEntity
     public bool Activo { get; set; } = true;
     public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;
     public DateTime? FechaActualizacion { get; set; }
+    public int? ModificadoPorUsuarioId { get; set; }
+    public Guid? ModificadoPorTokenId { get; set; }
     public DateTime? FechaEliminacion { get; set; }
     public DateTime? EliminarDefinitivamenteEn { get; set; }
     public int? EliminadoPorUsuario { get; set; }

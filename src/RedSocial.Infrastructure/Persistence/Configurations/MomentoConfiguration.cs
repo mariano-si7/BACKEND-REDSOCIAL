@@ -17,6 +17,9 @@ public class MomentoConfiguration : IEntityTypeConfiguration<Momento>
         builder.Property(m => m.LinkUrl).HasMaxLength(500);
         builder.Property(m => m.MotivoEliminacion).HasMaxLength(200);
         builder.Property(m => m.FechaCreacion).HasDefaultValueSql("SYSUTCDATETIME()");
+        builder.Property(m => m.FechaActualizacion).IsRequired(false);
+        builder.Property(m => m.ModificadoPorUsuarioId).IsRequired(false);
+        builder.Property(m => m.ModificadoPorTokenId).IsRequired(false);
         builder.Property(m => m.Activo).HasDefaultValue(true);
 
         builder.HasIndex(m => new { m.IdUsuario, m.FechaCreacion });

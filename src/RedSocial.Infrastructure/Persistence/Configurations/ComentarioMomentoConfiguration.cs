@@ -17,6 +17,8 @@ public class ComentarioMomentoConfiguration : IEntityTypeConfiguration<Comentari
         builder.Property(c => c.Activo).HasDefaultValue(true);
         builder.Property(c => c.FechaCreacion).HasDefaultValueSql("SYSUTCDATETIME()");
         builder.Property(c => c.FechaActualizacion).IsRequired(false);
+        builder.Property(c => c.ModificadoPorUsuarioId).IsRequired(false);
+        builder.Property(c => c.ModificadoPorTokenId).IsRequired(false);
 
         builder.HasIndex(c => new { c.IdMomento, c.IdComentarioPadre, c.Activo, c.FechaCreacion });
         builder.HasIndex(c => new { c.IdUsuario, c.FechaCreacion });

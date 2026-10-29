@@ -21,6 +21,8 @@ public class Usuario : IAuditableEntity
     public string? MotivoEstadoCuenta { get; set; }
     public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
     public DateTime? FechaActualizacion { get; set; }
+    public int? ModificadoPorUsuarioId { get; set; }
+    public Guid? ModificadoPorTokenId { get; set; }
     public DateTime? UltimoLogin { get; set; }
     public PerfilUsuario? Perfil { get; set; }
     public ICollection<UsuarioRol> Roles { get; set; } = [];

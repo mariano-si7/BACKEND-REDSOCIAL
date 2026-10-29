@@ -17,6 +17,9 @@ public class PerfilUsuarioConfiguration : IEntityTypeConfiguration<PerfilUsuario
         builder.Property(p => p.FotoPerfilUrl).HasMaxLength(500);
         builder.Property(p => p.TotalMeEncanta).HasDefaultValue(0);
         builder.Property(p => p.FechaCreacion).HasDefaultValueSql("SYSUTCDATETIME()");
+        builder.Property(p => p.FechaActualizacion).IsRequired(false);
+        builder.Property(p => p.ModificadoPorUsuarioId).IsRequired(false);
+        builder.Property(p => p.ModificadoPorTokenId).IsRequired(false);
 
         builder.HasIndex(p => p.IdUsuario).IsUnique();
         builder.HasIndex(p => p.NombrePerfil);

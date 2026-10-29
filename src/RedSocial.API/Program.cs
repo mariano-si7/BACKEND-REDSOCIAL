@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using RedSocial.API.Middleware;
 using RedSocial.API.Hubs;
 using RedSocial.API.Services;
+using RedSocial.Application.Interfaces.Services;
 using RedSocial.Application;
 using RedSocial.Infrastructure;
 using RedSocial.Infrastructure.Security;
@@ -22,7 +23,9 @@ if (builder.Environment.IsDevelopment())
     builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
 
 // ── Capas ────────────────────────────────────────────────────────────────
-builder.Services.AddApplication();  
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUserContext, CurrentUserContext>();
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // ── JWT ──────────────────────────────────────────────────────────────────
